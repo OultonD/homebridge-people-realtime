@@ -198,7 +198,7 @@ function PeopleAccessory(log, config, platform) {
     var that = this; 
     //REALTIME POLLING
     var statusemitter = pollingtoevent(function(done){
-    var stat = this.stateCache;
+    var stat = that.isActive();
     done(null,stat);
     },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
     
