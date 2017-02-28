@@ -56,17 +56,6 @@ PeoplePlatform.prototype = {
             this.accessories.push(this.peopleNoOneAccessory);
         }
         callback(this.accessories);
-
-            var statusemitter = pollingtoevent(function(done) {
-            done(null, body);
-            })
-            }, {longpolling:true,interval:300,longpollEventName:"statuspoll"});
-            
-            statusemitter.on("statuspoll", function(data) {
-            var binaryState = parseInt(data);
-            that.state = binaryState > 0;
-            that.log(that.service, "received data:"+that.status_url, "state is currently", binaryState);        
-            });
         
         this.startServer();
     },
