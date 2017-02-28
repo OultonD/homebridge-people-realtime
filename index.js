@@ -207,6 +207,7 @@ function PeopleAccessory(log, config, platform) {
     this.service
         .getcharacteristic(Characteristic.OccupancyDetected)
         .setValue(data);
+        }
 }
 
 PeopleAccessory.prototype.getState = function(callback) {
