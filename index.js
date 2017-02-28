@@ -3,6 +3,7 @@ var moment = require('moment');
 var request = require("request");
 var http = require('http');
 var url = require('url');
+var pollingtoevent = require('polling-to-event');
 var DEFAULT_REQUEST_TIMEOUT = 10000;
 var SENSOR_ANYONE = 'Anyone';
 var SENSOR_NOONE = 'No One';
@@ -56,10 +57,10 @@ PeoplePlatform.prototype = {
             this.accessories.push(this.peopleNoOneAccessory);
         }
         callback(this.accessories);
-        
+
         this.startServer();
     },
-    
+
     startServer: function() {
         //
         // HTTP webserver code influenced by benzman81's great
@@ -191,23 +192,21 @@ function PeopleAccessory(log, config, platform) {
         .on('get', this.getState.bind(this));
   
     this.initStateCache();
-
     if(this.pingInterval > -1) {
         this.ping();
     }
-    
+    var that = this; 
     //REALTIME POLLING
-    
     var statusemitter = pollingtoevent(function(done){
-    var stat = this.getState();
-    done(stat);
-    },{longpolling:true,interval:300,longpollEventName:"statuspoll"});
+    var stat = this.stateCache;
+    done(null,stat);
+    },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
     
-    statusemitter.on("statuspoll",function(data){
-    this.service
-        .getcharacteristic(Characteristic.OccupancyDetected)
+    statusemitter.on("Occupoll",function(data){
+    that.log("Updating ", that.name);
+    that.service.getCharacteristic(Characteristic.OccupancyDetected)
         .setValue(data);
-        }
+        });
 }
 
 PeopleAccessory.prototype.getState = function(callback) {
@@ -318,6 +317,17 @@ function PeopleAllAccessory(log, name, platform) {
     this.service
         .getCharacteristic(Characteristic.OccupancyDetected)
         .on('get', this.getState.bind(this));
+        var that = this; 
+            //REALTIME POLLING
+                var statusemitter = pollingtoevent(function(done){
+                    var stat = this.stateCache;
+                        done(null,stat);
+                        },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
+               statusemitter.on("Occupoll",function(data){
+                        this.log("Updating ", that.name);
+                        that.service.getCharacteristic(Characteristic.OccupancyDetected)
+                        .setValue(data);
+         });
 }
 
 PeopleAllAccessory.prototype.getState = function(callback) {
