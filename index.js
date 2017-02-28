@@ -320,7 +320,7 @@ function PeopleAllAccessory(log, name, platform) {
         var that = this; 
             //REALTIME POLLING
                 var statusemitter = pollingtoevent(function(done){
-                    var stat = this.stateCache;
+                    var stat = that.getAnyoneStateFromCache();
                         done(null,stat);
                         },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
                statusemitter.on("Occupoll",function(data){
