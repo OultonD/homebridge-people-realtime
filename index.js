@@ -324,7 +324,7 @@ function PeopleAllAccessory(log, name, platform) {
                         done(null,stat);
                         },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
                statusemitter.on("Occupoll",function(data){
-                        this.log("Updating ", that.name);
+                        that.log("Updating ", that.name);
                         that.service.getCharacteristic(Characteristic.OccupancyDetected)
                         .setValue(data);
          });
