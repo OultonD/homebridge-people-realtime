@@ -1,14 +1,14 @@
 
 {
-  "name": "homebridge-people",
-  "version": "0.4.0",
-  "description": "Homebridge plugin that provides details of who is in a Home",
+  "name": "homebridge-people-advanced",
+  "version": "0.0.1",
+  "description": "Homebridge plugin that provides details of who is in a Home. Forked from homebridge-people",
   "keywords": [
     "homebridge-plugin"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/PeteLawrence/homebridge-people.git"
+    "url": "https://github.com/OultonD/homebridge-people-realtime.git"
   },
   "engines": {
     "node": ">=0.12.0",
@@ -18,6 +18,7 @@
     "moment": "^2.11.2",
     "node-persist": "0.0.8",
     "ping": "^0.1.10",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "polling-to-event": ">=2.0.2"
   }
 }
