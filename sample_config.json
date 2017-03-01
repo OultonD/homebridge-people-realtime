@@ -1,0 +1,23 @@
+"platforms": [
+    {
+        "platform": "RTPeople",
+        "threshold" : 9,
+        "anyoneSensor" : true,
+        "nooneSensor" : false,
+        "webhookPort": 51828,
+        "cacheDirectory": "./.node-persist/storage",
+        "pingInterval": 10000,
+        "ignoreReEnterExitSeconds": 0,
+        "people" : [
+            {
+                "name" : "Alice", 
+                "target" : "192.168.0.69"
+            },
+            {
+                "name" : "Bob", 
+                "target" : "192.168.4.20"
+            }
+        ]
+    }
+]
+
