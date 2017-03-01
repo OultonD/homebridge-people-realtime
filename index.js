@@ -203,7 +203,7 @@ function PeopleAccessory(log, config, platform) {
     },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
     
     statusemitter.on("Occupoll",function(data){
-    that.log("Updating ", that.name);
+    that.log("Updating ", that.name, " ", data);
     that.service.getCharacteristic(Characteristic.OccupancyDetected)
         .setValue(data);
         });
@@ -324,7 +324,7 @@ function PeopleAllAccessory(log, name, platform) {
                         done(null,stat);
                         },{longpolling:true,interval:300,longpollEventName:"Occupoll"});
                statusemitter.on("Occupoll",function(data){
-                        that.log("Updating ", that.name);
+                        that.log("Updating ", that.name, " ", data);
                         that.service.getCharacteristic(Characteristic.OccupancyDetected)
                         .setValue(data);
          });
